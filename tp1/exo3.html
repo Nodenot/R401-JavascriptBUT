@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exo3</title>
+
+    <script type="text/javascript">
+        function maFonction() {
+            var longeur = prompt("longeur du rectangle");
+            var largeur = prompt("largeur du rectangle");
+            var perimetre = (longeur*2 + largeur*2);
+            alert("le perimetre du rectangle est : " + perimetre);
+        }
+        function fonctionAfichage(){
+            var longeur = prompt("longeur du rectangle");
+            var largeur = prompt("largeur du rectangle");
+            var perimetre = (longeur*2 + largeur*2);
+            document.write("le perimetre du rectangle est : " + perimetre);
+        }
+    </script>    
+</head>
+<body>
+    <h1>Écriture d'une fonction simple</h1>
+    <p>Cliquez sur le bouton pour lancer la fonction&nbsp;: <button onclick="maFonction()">Lancer la fonction</button></p>
+    <p>Cliquer sur le bouton pour lancer la fonction&nbsp;: <button onclick="fonctionAfichage()">Affichier le périmètre</button></p>
+</body>
+</html>

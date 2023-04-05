@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label id="0"></label><input type="number" id="in_0"><br>
+    <label id="1"></label><input type="number" id="in_1"><br>
+    <label id="2"></label><input type="number" id="in_2"><br>
+    <label id="3"></label><input type="number" id="in_3"><br>
+    <label id="4"></label><input type="number" id="in_4"><br>
+    <label id="5"></label><input type="number" id="in_5"><br>
+    <label id="6"></label><input type="number" id="in_6"><br>
+    <label id="7"></label><input type="number" id="in_7"><br>
+    <label id="8"></label><input type="number" id="in_8"><br>
+    <label id="9"></label><input type="number" id="in_9"><br>
+    <button onclick="verif()">Vérifier résultats</button>
+    <script>
+        var tab = new Array(10);
+        for (let i = 0; i < tab.length; i++) {
+            tab[i] = Math.floor(Math.random()*10);
+        }
+        for (let i = 0; i < tab.length; i++) {
+            document.getElementById(i) .innerHTML = tab[i]+" x "+i+" = ";
+            
+        }
+
+        function calcul(a,b) {
+            return a*b;
+        }
+
+        function verif() {
+            var cpt = 0;
+            for (let i = 0; i < tab.length; i++) {
+                var a = parseInt(document.getElementById("in_"+i).value);
+                if (a == calcul(tab[i],i)) {
+                    cpt++;
+                }
+            }
+            alert("vous avez "+cpt+" bonnes reponses");
+        }
+    </script>
+</body>
+</html>

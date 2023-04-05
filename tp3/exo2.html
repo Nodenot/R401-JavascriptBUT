@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" onsubmit="return false">
+        <input type="checkbox" name="cb_ip" id="cb_ip">
+        <input type="text" name="ip" id="ip">
+        <label>IP</label>
+        <br>
+        <input type="checkbox" name="cb_domain" id="cb_domain">
+        <input type="text" name="domain" id="domain">
+        <label>Domain</label>
+        <br>
+        <input type="submit" value="valider" onclick="trie()">
+    </form>
+
+    <script>
+        tabUrl = new Array();
+        tabUrl[0] = "https://www.google.com";
+        tabUrl[1] = "https://www.facebook.com";
+        tabUrl[2] = "https://www.youtube.com";
+        tabUrl[3] = "https://www.yahoo.com";
+        tabUrl[4] = "https://www.impots.gouv.fr";
+        tabUrl[5] = "152.166.189.192";
+        tabUrl[6] = "237.184.99.127";
+        tabUrl[7] = "243.39.76.75";
+        tabUrl[8] = "112.17.157.242";
+        tabUrl[9] = "50.248.25.47";
+
+        function trie() {
+            if (document.getElementById('cb_ip').checked && document.getElementById('cb_domain').checked) {
+                domain = document.getElementById('domain').value;
+                ip = document.getElementById('ip').value;
+                for (i=0;i<10;i++) {
+                    if (tabUrl[i].includes(domain) || tabUrl[i].includes(ip)) {
+                        ouvrirFenetre_(tabUrl[i],i);
+                    }
+                }
+            }
+            else if (document.getElementById('cb_ip').checked) {
+                ip = document.getElementById('ip').value;
+                for (i=0;i<10;i++) {
+                    if (tabUrl[i].includes(ip)) {
+                        ouvrirFenetre(tabUrl[i],i);
+                    }
+                }
+            }
+            else if (document.getElementById('cb_domain').checked) {
+                domain = document.getElementById('domain').value;
+                for (i=0;i<10;i++) {
+                    if (tabUrl[i].includes(domain)) {
+                        ouvrirFenetre(tabUrl[i],i);
+                    }
+                }
+            }
+            else {
+                alert("veuillez cocher une case");
+            }
+        }
+
+
+        function ouvrirFenetre(url, i) {
+            window.open(url,"fenetre"+i,"width=500,height=500,left="+Math.floor(Math.random() * 1000)+",top="+Math.floor(Math.random() * 1000)+"");
+        }
+
+
+    </script>
+</body>
+</html>

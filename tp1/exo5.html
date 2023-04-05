@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exo5</title>
+
+    <script type="text/javascript">
+        function jour() {
+            var mois = prompt("saisir le mois");
+            var annee = prompt("saisir l'année");
+            var nbJours = 0;
+            switch (mois) {
+                case "janvier":
+                    nbJours = 31;
+                    break;
+                case "fevrier":
+                    if (parseInt(annee) % 4 == 0) {
+                        nbJours = 29;
+                        break;
+                    } else {
+                        nbJours = 28;
+                        break;
+                    }
+                case "mars":
+                    nbJours = 31;
+                    break;
+                case "avril":
+                    nbJours = 30;
+                    break;
+                case "mai":
+                    nbJours = 31;
+                    break;
+                case "juin":
+                    nbJours = 30;
+                    break;
+                case "juillet":
+                    nbJours = 31;
+                    break;
+                case "aout":
+                    nbJours = 31;
+                    break;
+                case "septembre":
+                    nbJours = 30;
+                    break;
+                case "octobre":
+                    nbJours = 31;
+                    break;
+                case "novembre":
+                    nbJours = 30;
+                    break;
+                case "decembre":
+                    nbJours = 31;
+                    break;
+                default:
+                    alert("saisir un mois non valide");
+                    break;
+            }
+            alert("le nombre de jour dans le mois " + mois + " de l'année " + annee + " est : " + nbJours)
+        }
+    </script>
+
+</head>
+<body>
+    <button onclick="jour()">nb de jour dans un mois d'une année</button>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exo7</title>
+
+    <script>
+    function calcul() {
+        var calcul = document.getElementById("calcul").value;
+        var resultat = eval(calcul);
+        document.getElementById("resultat").value = resultat;
+    }
+    </script>
+
+</head>
+<body>
+    <input type="text" name="calcul" id="calcul" placeholder="saisir un calculr">
+    <button onclick="calcul()">=</button>
+    <input type="text" name="resultat" id="resultat" disabled>
+</body>
+</html>

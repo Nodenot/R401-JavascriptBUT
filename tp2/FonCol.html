@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+<select onchange="Ajouter(document.getElementById('libelle').value)" id="libelle">
+    <option> blanc </option>
+    <option> bleu </option>
+    <option> vert </option>
+    <option> jaune </option>
+    <option> orange </option>
+    <option> rouge </option>
+    <option> violet </option>
+    <option> rose </option>
+    <option> gris </option>
+    <option> noir </option>
+</select>
+<button onclick="Ajouter(document.getElementById('libelle').value)">go</button>
+    <script>
+        //var couleur=[["gris","bleu","vert",],["#C0C0C0","#669999","#99FF66"]]; 
+        var couleur = [["gris", "bleu", "vert", "jaune", "orange", "rouge", "violet", "rose", "blanc", "noir"],["#C0C0C0", "#669999", "#99FF66", "#FFFF00", "#FFA500", "#FF0000", "#800080", "#FFC0CB", "white", "black"]];
+        function Ajouter(valeur) {
+            switch (valeur) {
+                case couleur[0][0]:
+                    document.body.style.backgroundColor = couleur[1][0];
+                    break;
+                case couleur[0][1]:
+                    document.body.style.backgroundColor = couleur[1][1];
+                    break;
+                case couleur[0][2]:
+                    document.body.style.backgroundColor = couleur[1][2];
+                    break;
+                case couleur[0][3]:
+                    document.body.style.backgroundColor = couleur[1][3];
+                    break;
+                case couleur[0][4]:
+                    document.body.style.backgroundColor = couleur[1][4];
+                    break;
+                case couleur[0][5]:
+                    document.body.style.backgroundColor = couleur[1][5];
+                    break;
+                case couleur[0][6]:
+                    document.body.style.backgroundColor = couleur[1][6];
+                    break;
+                case couleur[0][7]:
+                    document.body.style.backgroundColor = couleur[1][7];
+                    break;
+                case couleur[0][8]:
+                    document.body.style.backgroundColor = couleur[1][8];
+                    break;
+                case couleur[0][9]:
+                    document.body.style.backgroundColor = couleur[1][9];
+                    break;
+                default:
+                    alert("couleur non disponible");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

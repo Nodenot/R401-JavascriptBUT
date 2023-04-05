@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="1" onclick="alert(somRec(4))">button somRec</button>
+    <button id="2" onclick="alert(somFor(4))">button somFor</button>
+    <button id="3" onclick="afficherSomRec()">button somRec</button>
+
+    <script>
+        function somRec(i){
+            if(i<0 || Number.isInteger(i) == false) {
+                alert("Somme indéfinie");
+            }
+            else {
+                if(i==0)
+                    return 0;
+                else
+                    return somRec(i-1) + i;
+            }
+        }
+
+        function somFor(i) {
+            var som = 0;
+            for (let j = 0; j <= i; j++) {
+                som += j;
+            }
+            return som;
+        }
+
+        function afficherSomRec() {
+            var i = parseInt(prompt('donner un nombre',1));
+            alert('la valeur de somRec('+i+') est : '+somRec(parseInt(i)));
+        }
+    </script>
+</body>
+</html>

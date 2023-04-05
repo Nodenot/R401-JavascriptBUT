@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exo6</title>
+
+    <script>
+        function tableMulti () {
+            var nombre = parseInt(prompt("saisir un nombre"));
+            if (Number.isInteger(nombre) == false) {
+                alert("saisir un nombre entier");
+            }
+            else {
+            var resultat = 0;
+            for (let i = 0; i <= 10; i++) {
+                resultat = nombre * i;
+                var ligneOp = document.getElementById("op-"+i)
+                ligneOp.innerHTML = nombre + " * " + i + " = ";
+                var ligneRes = document.getElementById("res-"+i)
+                ligneRes.innerHTML = resultat;
+            }
+            }
+        }
+    </script>
+
+</head>
+<button onclick="tableMulti()">click</button>
+<body>
+    <table>
+        <tr>
+            <th id="op-0"></th>
+            <th id="res-0"></th>
+        </tr>
+        <tr>
+            <td id="op-1"></td>
+            <td id="res-1"></td>
+        </tr>
+        <tr>
+            <td id="op-2"></td>
+            <td id="res-2"></td>
+        </tr>
+        <tr>
+            <td id="op-3"></td>
+            <td id="res-3"></td>
+        </tr>
+        <tr>
+            <td id="op-4"></td>
+            <td id="res-4"></td>
+        </tr>
+        <tr>
+            <td id="op-5"></td>
+            <td id="res-5"></td>
+        </tr>
+        <tr>
+            <td id="op-6"></td>
+            <td id="res-6"></td>
+        </tr>
+        <tr>
+            <td id="op-7"></td>
+            <td id="res-7"></td>
+        </tr>
+        <tr>
+            <td id="op-8"></td>
+            <td id="res-8"></td>
+        </tr>
+        <tr>
+            <td id="op-9"></td>
+            <td id="res-9"></td>
+        </tr>
+        <tr>
+            <td id="op-10"></td>
+            <td id="res-10"></td>
+        </tr>
+    </table>
+</body>
+</html>

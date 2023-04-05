@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 - Exercice 2</title>
+</head>
+<body>
+    <h1>TP3 - Exercice 2</h1>
+
+    <form onaction="return false">
+        <label for="saisie">Saisir les URL à visiter ayant une fin : </label>
+        <input type="text" id="saisie" name="saisie">
+
+        <input type="submit" value="Ouvrir" onclick="ouvrirUrlAvecExtension(document.getElementById('saisie').value)">
+    </form>
+
+    <script>
+        let tabURL = [
+            "https://google.fr",
+            "https://amazon.com",
+            "https://ebay.fr",
+            "https://leboncoin.fr",
+            "https://cdiscount.fr",
+            "https://fnac.fr",
+            "https://decathlon.fr",
+            "https://microsoft.com",
+            "https://apple.com",
+            "http://192.168.1.192",
+            "https://github.com"
+        ]
+
+        function afficherFenetres(nbFenetre){
+            for(let i = 0; i < nbFenetre; i++){
+                let gauche = Math.floor(Math.random() * 1000);
+                let haut = Math.floor(Math.random() * 1000);
+                let fenetre = window.open("", "", "width=500, height=500, left=" + gauche + ", top=" + haut);
+
+                // Couleur de fond aléatoire
+                let r = Math.floor(Math.random() * 255);
+                let v = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                fenetre.document.body.style.backgroundColor = "rgb(" + r + "," + v + "," + b + ")";
+            }
+        }
+
+        function ouvrirUrlAvecExtension(extension){
+            let nbFenetre = 0;
+
+            if(!extension.startsWith(".")){
+                return;
+            }
+
+            for(let i = 0; i < tabURL.length; i++){
+                if(tabURL[i].endsWith(extension)){
+                    nbFenetre++;
+                }
+            }
+            afficherFenetres(nbFenetre);
+        }
+
+
+
+    </script>
+</body>
+</html>

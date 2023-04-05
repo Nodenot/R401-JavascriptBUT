@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP4 - Exo 1</title>
+</head>
+<body>
+    <h1>TP4 - Exercice 1</h1>
+    <form onsubmit="return false">
+        <input type="text" id="motCle" placeholder="Mot clé">
+        <input type="submit" value="Rechercher" onclick="rechercher()">
+        <div id="lienVersMot"></div>
+        <p id="dispo"></p>
+
+    </form>
+
+    <script>
+        let D1 = "D1"
+        let D2 = "D2"
+
+        let tabMotsCles = {
+            "art":[D1, D2],
+            "plaire": [D1],
+            "est" :[D1],
+            "tromper": [D1],
+            "nous": [D2],
+            "avons" :[D2],
+            "afin" :[D2],
+            "pas" :[D2],
+            "mourir" :[D2],
+            "vérité" :[D2]
+        }
+
+        let liens = {
+            "D1" : "https://google.fr",
+            "D2" : "https://amazon.fr"
+        }
+
+        // Récupérer la liste des mots clés
+        let listeMotsCles = Object.keys(tabMotsCles);
+
+        function affichageMotsCles(){
+            let liste = document.getElementById("dispo");
+            liste.innerHTML = "Mots clés disponibles : <br>";
+            for(let i = 0; i < listeMotsCles.length; i++){
+                liste.innerHTML += listeMotsCles[i] + "</a><br>";
+            }
+        }
+        affichageMotsCles();
+
+        function rechercher(){
+            let motCle = document.getElementById("motCle").value;
+            let lienVersMot = document.getElementById("lienVersMot");
+            
+            if(listeMotsCles.includes(motCle)){
+                let unCode;
+                unCode = "Le mot clé '" + motCle + "' : <br>";
+
+                // Tableau des documents associés au mot clé
+                unCode += "<table><tr><th>Document</th><th>Lien</th></tr>";
+                for(let i = 0; i < tabMotsCles[motCle].length; i++){
+                    let doc = tabMotsCles[motCle][i];
+                    unCode += "<tr><td>" + doc + "</td><td><a href='" + liens[doc] + "'>Lien</a></td></tr>";
+                }
+                unCode += "</table>";
+
+                lienVersMot.innerHTML = unCode;
+            }
+            else{
+                lienVersMot.innerHTML = "Le mot clé '" + motCle + "' n'existe pas";
+            }
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

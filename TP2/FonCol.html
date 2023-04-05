@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FonCol</title>
+</head>
+<body>
+    <h1>FonCol</h1>
+    <p>Choisissez une couleur de fond (gris, bleu ou vert)</p>
+    
+
+    <script>
+        var gris = "#C0C0C0";
+        var bleu = "#669999";
+        var vert = "#99FF66";
+        var fond = prompt("Choisissez une couleur de fond (gris, bleu ou vert)");
+        
+        if (fond == "gris"){
+            document.body.style.backgroundColor = gris;
+        }
+        else if (fond == "bleu"){
+            document.body.style.backgroundColor = bleu;
+        }
+        else if (fond == "vert"){
+            document.body.style.backgroundColor = vert;
+        }
+        else{
+            alert("Vous n'avez pas choisi une couleur de fond valide");
+
+        }
+    </script>
+</body>
+</html>

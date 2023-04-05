@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP de JavaScript</title>
+</head>
+<body>
+    <h1>TP de JavaScript</h1>
+    <h2>Exercice 1</h2>
+    <p>Question 2</p>
+    <p id="ex1-question2"></p>
+
+    <p>Question 3</p>
+    <p id="ex1-question3"></p>
+
+    <h2>Exercice 2</h2>
+
+    <p>Question 1</p>
+    <p id="ex2-question1"></p>
+
+    <p>Question 2</p>
+    <p id="ex2-question2"></p>
+
+    <p>Question 3</p>
+    <button onclick="demanderNombre()">Lancer la fonction</button>
+    <p id="ex2-question3"></p>
+
+    <h2>Exercice 3</h2>
+
+    <p id="ex3-question1"></p>
+    
+
+    <script>
+        // Exercice 1
+
+        // Question 1
+        var tabJours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+
+        // Question 2
+        affichage = tabJours.join("; ");
+        document.querySelector("#ex1-question2").innerHTML = affichage;
+
+        // Question 3
+        affichage = "";
+        for (let i = 0; i < tabJours.length; i++){
+            affichage += "Jour " + i + " : " + tabJours[i] + "<br>";
+        }
+        document.querySelector("#ex1-question3").innerHTML = affichage;
+
+
+        // Exercice 2
+
+        // Question 1
+
+        function somRec(i){
+            if(i >= 0 && Number.isInteger(i)){
+                if(i == 0){
+                    return 0;
+                }
+                else{
+                    return i + somRec(i-1);
+                }
+            }
+            else{
+                return "Le nombre entré n'est pas un nombre";
+            }
+        }
+        document.querySelector("#ex2-question1").innerHTML = somRec(5);
+
+        // Question 2
+
+        function somFor(i){
+            if (i == 0){
+                return "Somme indéfinie";
+            }
+            else{
+                som = 0;
+                for (let j = 0; j <= i; j++){
+                    som += j;
+                }
+                return som;
+            }
+        }
+        document.querySelector("#ex2-question2").innerHTML = somFor(5);
+
+
+        // Question 3
+        function demanderNombre(){
+            var msg;
+            var nb = parseInt(prompt("Entrez un nombre :"));
+            if (!Number.isInteger(nb)){
+                msg = "Le nombre entré n'est pas un nombre";
+            }
+            else{
+                msg = "La veleur de somRec("+nb+") est :"+somFor(nb);
+            }
+            document.querySelector("#ex2-question3").innerHTML = msg;
+        }
+
+        // Exercice 3
+        document.querySelector("#ex3-question1").innerHTML = `
+        Nom du navigateur et sa version: ${navigator.userAgent} <br>
+        Titre du document:  ${document.title} <br>
+        Dernière modification : ${document.lastModified}` 
+
+
+    </script>
+</body>
+</html>

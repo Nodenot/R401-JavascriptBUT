@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <!-- Vers style.css -->
+    <link rel="stylesheet" href="style.css">
+    <noscript>
+        <style>
+            main {
+                display: none;
+            }
+        </style>
+        <h1>Vous devez activer le JavaScript pour voir ce site.</h1>
+    </noscript>
+</head>
+<body>
+    <main>
+        <img src="https://media.sudouest.fr/11316124/1000x500/20210930084012-p254275.jpg?v=1655452265" alt="logo">
+        <h1>Contact Us</h1>
+        <section>
+            <p id="messageNonSurChrome" class="info"></p>
+
+            <!-- Formulaire de contact -->
+            <form onsubmit="return false;">
+                <label for="nom">Name (required)</label><br>
+                <input type="text" name="nom" id="nom" required><br>
+
+                <label for="email">Email (required)</label><br>
+                <input type="email" name="email" id="email" required><br>
+
+                <label for="sujet">Subject (required)</label><br>
+                <input type="text" name="sujet" id="sujet" required><br>
+
+                <label for="compagny">Company</label><br>
+                <select id="compagny">
+                    <option value="compagny1">Company1</option>
+                    <option value="compagny2">Company2</option>
+                    <option value="compagny3">Company3</option>
+                    <option value="other">Other</option>
+                </select><br>
+                <div id="addCompagny"></div>
+
+                <label for="message">Your Message</label><br>
+                <textarea name="message" id="message" cols="30" rows="10" required></textarea><br>
+
+                <p id="captcha">Code à générer</p>
+                <input type="text" name="captcha" id="captcha2" required><br>
+
+                <input type="submit" value="Send" onclick="verifierFormulaireCorrect()">
+            </form>
+        </section>
+        <aside>
+            <p>Adresse : IUT de Bayonne et du Pays Basque - 2 Allée du Parc de Montaury Anglet 64600</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.864111000001!2d-1.521429684770201!3d43.49310097912694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f8b5b8b2a7%3A0x8b2b2b2b2b2b2b2b2!2sIUT%20de%20Bayonne%20et%20du%20Pays%20Basque!5e0!3m2!1sfr!2sfr!4v1633001000000!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </aside>
+
+    </main>
+
+
+    <script>      
+    
+        // Vérification du navigateur
+        if (navigator.userAgent.indexOf("Chrome") == -1) {
+            document.getElementById("messageNonSurChrome").innerHTML = "Vous n'êtes pas sur Chrome";
+        }
+
+        // Vérification du langage
+        if (navigator.language != "fr-FR") {
+            document.body.innerHTML = "";
+            document.write("Le langage de votre navigateur n'est pas le français");
+        }    
+
+        // Captcha entre 00000 et 99999
+        let captcha = Math.floor(Math.random() * 100000);
+        document.getElementById("captcha").innerHTML = captcha;
+
+        let tentative = 0;
+
+        // Vérification du captcha
+        function verifCaptcha() {
+            let saisie = parseInt(document.getElementById("captcha2").value);
+            if (saisie == captcha) {
+                alert("Captcha correct");
+            } else {
+                // Indiquer s'il est plus petit ou plus grand
+                if (saisie < captcha) {
+                    alert("Captcha incorrect : trop petit");
+                } else {
+                    alert("Captcha incorrect : trop grand");
+                }
+                tentative++;
+                if (tentative == 5) {
+                    alert("Vous avez fait 5 tentatives, vous êtes banni du site");
+                    window.location.href = "ban.html";
+                }
+
+                // Modification du captcha
+                captcha = Math.floor(Math.random() * 100000);
+                document.getElementById("captcha").innerHTML = captcha;
+            }
+        }
+
+
+        function verifierFormulaireCorrect(){
+            let nom = document.getElementById("nom").value;
+            let email = document.getElementById("email").value;
+            let sujet = document.getElementById("sujet").value;
+            let message = document.getElementById("message").value;
+            let captcha = document.getElementById("captcha2").value;
+            let erreur = false;
+
+            // Mettre les champs en rouge s'ils sont vides
+            if (nom == "") {
+                document.getElementById("nom").style.backgroundColor = "red";
+                erreur = true;
+            } else {
+                document.getElementById("nom").style.backgroundColor = "white";
+            }
+
+            if (email == "") {
+                document.getElementById("email").style.backgroundColor = "red";
+                erreur = true;
+            } else {
+                document.getElementById("email").style.backgroundColor = "white";
+            }
+
+            // Vérification de l'email (un seul @ et au moins un .)
+
+            // compter le nombre de @ 
+            let nbAt = 0;
+            for (let i = 0; i < email.length; i++) {
+                if (email[i] == "@") {
+                    nbAt++;
+                }
+            }
+
+            // compter le nombre de .
+            let nbPoint = 0;
+            for (let i = 0; i < email.length; i++) {
+                if (email[i] == ".") {
+                    nbPoint++;
+                }
+            }
+
+            // Vérifier que le nombre de @ est égal à 1 et que le nombre de . est supérieur à 0
+            if (nbAt != 1 && nbPoint == 0) {
+                document.getElementById("email").style.backgroundColor = "red";
+                erreur = true;
+            } else {
+                document.getElementById("email").style.backgroundColor = "white";
+            }
+
+
+            if (sujet == "") {
+                document.getElementById("sujet").style.backgroundColor = "red";
+                erreur = true;
+            } else {
+                document.getElementById("sujet").style.backgroundColor = "white";
+            }
+
+            if(!erreur){
+                if (captcha == "") {
+                    document.getElementById("captcha2").style.backgroundColor = "red";
+                    erreur = true;
+                } else {
+                    document.getElementById("captcha2").style.backgroundColor = "white";
+                    // Vérification du captcha
+                    verifCaptcha();
+                }
+            }
+
+            if(!erreur){
+                let confirmation = window.confirm("Voulez-vous envoyer le message à " + nom + " ?");
+                if (confirmation) {
+                    window.location.href = "mailto:samuel.hentrics@gmail.com";
+                    alert("Message envoyé à " + nom);
+                }
+            }
+
+            
+
+        }
+
+        // Detecter le changement de valeur dans le select
+        document.getElementById("compagny").addEventListener("change", function() {
+            if (this.value == "other") {
+                document.getElementById("addCompagny").innerHTML = 
+                "<label for='compagny2'>Add a compagny</label><br><input type='text' name='compagny2' id='compagny2' required>"+
+                "<a type='button' onclick='ajouterDansSelect()'>Ajouter</a><br>";
+            } else {
+                document.getElementById("addCompagny").innerHTML = "";
+            }
+        });
+
+        // Ajouter la valeur du champ dans le select si celui-ci ne commence pas par un chiffre
+        function ajouterDansSelect() {
+            let compagny2 = document.getElementById("compagny2").value;
+            if (compagny2[0] >= 0 && compagny2[0] <= 9) {
+                alert("Le nom de la compagnie ne peut pas commencer par un chiffre");
+            } else {
+                document.getElementById("compagny").innerHTML += "<option value='"+compagny2+"'>"+compagny2+"</option>";
+                document.getElementById("addCompagny").innerHTML = "";
+
+                document.getElementById("compagny").value = compagny2;
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

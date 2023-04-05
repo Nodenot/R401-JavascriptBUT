@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+}
+
+main{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+
+img{
+    width: 100%;
+    height:200px;
+    grid-column : 1/4;
+}
+
+section{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-column : 1;
+    padding:30px;
+}
+
+input{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+a[type="button"]{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+button{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+form > select{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+form > textarea{
+    width: 100%;
+    height: 100px;
+    border: none;
+    border-bottom: 1px solid #000;
+    outline: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+aside{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-column : 2;
+    padding:30px;
+
+}
+
+aside> iframe{
+    width: 100%;
+    height: 100%;
+}

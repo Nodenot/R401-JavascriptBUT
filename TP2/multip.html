@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplications</title>
+</head>
+<body>
+    <h1>Multiplications</h1>
+
+    <p><a id="1"></a><input type="text" id="res1"></p>
+    <p><a id="2"></a><input type="text" id="res2"></p>
+    <p><a id="3"></a><input type="text" id="res3"></p>
+    <p><a id="4"></a><input type="text" id="res4"></p>
+    <button onclick="verifierResultats()">Vérifier les résultats</button>
+
+    <script>
+        
+        var tabRes = new Array(4);
+        for (let i = 0; i < 4; i++) {
+            var nb1 = Math.floor(Math.random() * 10);
+            var nb2 = Math.floor(Math.random() * 10);
+            var res = nb1 * nb2;
+            document.querySelector("#" + i).innerHTML = nb1 + " * " + nb2 + " = ";
+            tabRes[i] = res;
+        }
+
+        function verifierResultats(){
+            var nbResultatsOk = 0;
+            var res1 = document.querySelector("#res1").value;
+            var res2 = document.querySelector("#res2").value;
+            var res3 = document.querySelector("#res3").value;
+            var res4 = document.querySelector("#res4").value;
+
+            if(res1 == tabRes[0]){
+                nbResultatsOk++;
+            }
+            if(res2 == tabRes[1]){
+                nbResultatsOk++;
+            }
+            if(res3 == tabRes[2]){
+                nbResultatsOk++;
+            }
+            if(res4 == tabRes[3]){
+                nbResultatsOk++;
+            }
+
+            if(nbResultatsOk == 4){
+                alert("Bravo, vous avez réussi !");
+            }
+            else{
+                var result = confirm("Vous avez " + nbResultatsOk + " bonnes réponses, correction ?");
+
+                if(result)  {
+                    alert("Les résultats sont : 6, 42, 16, 15");
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

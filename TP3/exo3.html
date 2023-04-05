@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 - Exercice 3</title>
+</head>
+<body>
+    <image src="" alt="Image" id="img" width="30%">
+
+    <script>
+        let tabImg = [
+            "img/1.jpg",
+            "img/2.jpg",
+            "img/3.jpg",
+            "img/4.jpg",
+            "img/5.jpg"            
+        ]
+
+        let idImgActuelle = 0;
+
+        function afficherImage(){
+            document.getElementById("img").src = tabImg[idImgActuelle];
+        }
+
+        function suivante(){
+            idImgActuelle++;
+            if(idImgActuelle >= tabImg.length){
+                idImgActuelle = 0;
+            }
+            afficherImage();
+        }
+
+        // Changer d'image toutes les 3 secondes
+        afficherImage();
+        setInterval(suivante, 3000);
+
+        // Changer d'image au clic sur l'image
+        document.getElementById("img").addEventListener("click", suivante);
+
+        // Changer d'image au clic sur les flèches du clavier
+        document.addEventListener("keydown", function(e){
+            if(e.key == "ArrowRight"){
+                suivante();
+            }
+        });
+    </script>
+</body>
+</html>

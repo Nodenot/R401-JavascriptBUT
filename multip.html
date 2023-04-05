@@ -4,74 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>multiplication</title>
+    <title>Document</title>
 </head>
 <body>
-    <section id="exo4">
-
-        <div><span id="label1">3*2</span>=<input type="text" id="input"></div>
-        <div><span id="label2">6*7</span>=<input type="text" id="input"></div>
-        <div><span id="label3">4*4</span>=<input type="text" id="input"></div>
-        <div><span id="label4">3*5</span>=<input type="text" id="input"></div>
-    </section>
-
-    <br><br>
-    <button id="btn" onclick="verif()">Vérifier</button>
-    <div>
-    <label for="color">Choisissez une couleur</label>
-    <input type="color" id="color" value="#ff0000">
-    </div>
-
-    <div>
-    <label for="povrecolor">Choisissez une couleur</label>
-    <select name="povrecolor" id="povrecolor">
-        <option value="#C0C0C0">Gris</option>
-        <option value="#99FF66">Vert</option>
-        <option value="#669999">Bleu</option>
-
-    </div>
-
-    
+    <table>
+        <tr>
+            <td>3*5</td>
+            <td><input type="number" id="reponseUser"></td>
+        </tr>
+        <tr>
+            <td>6*7</td>
+            <td><input type="number" id="reponseUser"></td>
+        </tr>
+        <tr>
+            <td>3*5</td>
+            <td><input type="number" id="reponseUser"></td>
+        </tr>
+        <!-- <tr>
+            <td>2*5</td>
+            <td><input type="reponseUser"></td>
+        </tr> -->
+    </table>
+    <br>
+    <button onclick="verifier()"    >Verifier Resultat</button>
+    <script>
+        // Exercice 4
+        function verifier() {
+            let bonneReponse = 0
+            let mauvaiseReponse = 0
+            let nombreDeReponse = document.querySelectorAll('tr')
+            nombreDeReponse.forEach((unTR) => {
+                let operation = unTR.querySelectorAll("td")[0].innerText
+                let reponse = eval(operation)
+                let responseUser = unTR.querySelector("input#reponseUser").value
+                responseUser == reponse ? bonneReponse++ : mauvaiseReponse++
+            })
+            confirm(`Vous avez: ${bonneReponse} bonne reponse et ${mauvaiseReponse} mauvaiseReponse`)
+        }
+        
+    </script>
 </body>
 </html>
-
-<script>
-
-    function verif(){
-        //On recupe les libellés des div dans la section exo4
-        var instru=document.getElementById('exo4').getElementsByTagName('div');
-        errors=0;
-        for (let i=0; i<instru.length;i++){
-            //On recupere le span de chaque div
-            var express=instru[i].getElementsByTagName('span')[0];
-            var res=instru[i].getElementsByTagName('input')[0];
-            if (eval(express.innerHTML)!=res.value){
-                errors++;
-                res.style.borderColor="red";
-            }
-            else{
-                res.style.borderColor="green";
-            }
-            
-        }
-
-        if (errors==0){
-            alert("Bravo, vous avez réussi");
-        }
-        else{
-            alert("Vous avez fait "+errors+" erreurs");
-        }
-
-
-    }
-    document.getElementById("color").addEventListener("change",function(){
-        document.body.style.backgroundColor=this.value;
-    });
-
-    document.getElementById("povrecolor").addEventListener("change",function(){
-        document.body.style.backgroundColor=this.value;
-    });
-
-
-
-</script>

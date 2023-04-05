@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP4</title>
+    <script>
+        var Data = [
+            {term: "art", uris: ["http://monsite1.fr", "http://monsite2.fr"]},
+            {term: "plaire", uris: ["http://monsite1.fr"]},
+            {term: "est", uris: ["http://monsite1.fr"]},
+            {term: "tromper", uris: ["http://monsite1.fr"]},
+            {term: "nous", uris: ["http://monsite2.fr"]},
+            {term: "avons", uris: ["http://monsite2.fr"]},
+            {term: "afin", uris: ["http://monsite2.fr"]},
+            {term: "pas", uris: ["http://monsite2.fr"]},
+            {term: "mourir", uris: ["http://monsite2.fr"]},
+            {term: "vérité", uris: ["http://monsite2.fr"]}
+        ];
+
+        function generateTableRows() {
+            var tableBody = document.getElementById("searchResults").getElementsByTagName("tbody")[0];
+            for (var i = 0; i < Data.length; i++) {
+                var newRow = tableBody.insertRow(-1);
+                var termCell = newRow.insertCell(0);
+                termCell.innerHTML = Data[i].term;
+                var uriCell = newRow.insertCell(1);
+                var uriLinks = "";
+                for (var j = 0; j < Data[i].uris.length; j++) {
+                    uriLinks += "<a href=\"" + Data[i].uris[j] + "\" target=\"_blank\">" + Data[i].uris[j] + "</a>";
+                    if (j < Data[i].uris.length - 1) {
+                        uriLinks += ", ";
+                    }
+                }
+                uriCell.innerHTML = uriLinks;
+            }
+        }
+
+        function search() {
+            var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+            var resultsTable = document.getElementById("searchResults").getElementsByTagName("tbody")[0];
+            for (var i = 0; i < resultsTable.rows.length; i++) {
+                var term = resultsTable.rows[i].cells[0].innerHTML.toLowerCase();
+                var uris = resultsTable.rows[i].cells[1].getElementsByTagName("a");
+                if (term === searchTerm) {
+                    for (var j = 0; j < uris.length; j++) {
+                        uris[j].setAttribute("href", uris[j].innerHTML);
+                        uris[j].setAttribute("target", "_blank");
+                    }
+                    resultsTable.rows[i].style.display = "";
+                } else {
+                    resultsTable.rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+    
+</head>
+<body onload="generateTableRows()">
+    <h1>Recherche</h1>
+    <label for="searchInput">Entrez un terme de recherche :</label>
+    <input type="text" id="searchInput">
+    <button onclick="search()">Rechercher</button>
+    <table id="searchResults">
+        <thead>
+            <tr>
+                <th>Terme</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>

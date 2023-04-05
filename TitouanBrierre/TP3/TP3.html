@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <noscript>
+    Your browser does not support JavaScript!
+    </noscript>
+    <form id="form-contact">
+        <label for="nom">Nom</label>
+        <input class="obligatoire" type="text" name="nom" id="nom">
+        <label for="email">Email</label>
+        <input class="obligatoire" type="email" name="email" id="email">
+        <label for="subject">Subject</label>
+        <input class="obligatoire" type="text" name="subject" id="subject">
+
+        <select id="sujet">
+            <option value="smart-building">Smart Building</option>
+            <option value="energy-management">Energy Management</option>
+            <option value="ontology">Ontology</option>
+            <option value="micro-grid">Micro Grid</option>
+            <option value="other">Other</option>
+        </select>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <p id="numero-aleatoire"></p>
+
+        <input type="number" name="input" id="input">
+        <button type = "submit" id="verif">Send</button>  
+
+    </form>
+</body>
+</html>
+
+<script>
+
+    regex = /[^\s@]+@[^\s@]+\.[^\s@]+/
+
+    function verifMail(){
+        if(regex.test(document.getElementById("email").value)){
+            document.getElementById("email").style.backgroundColor = "green";
+        }
+        else{
+            document.getElementById("email").style.backgroundColor = "red";
+        }
+    }
+
+    function checkObligatoire(){
+        var champsObligatoires = document.getElementsByClassName("obligatoire");
+        console.log(champsObligatoires)
+        for(var i = 0; i < champsObligatoires.length; i++){
+            if(champsObligatoires[i].value == ""){
+                champsObligatoires[i].style.backgroundColor = "red";
+                document.getElementById("verif").type = "button";
+            }
+        }
+        if(champsObligatoires.length == 0){
+            document.getElementById("email")
+        }
+    }
+    
+    function changeNumber(){
+        numeroAleatoire = Math.floor(Math.random() * 10000);
+        document.getElementById("numero-aleatoire").innerHTML = numeroAleatoire;
+    }
+    changeNumber();
+    var nombreSaisies = 0;
+    document.getElementById("verif").addEventListener("click", function(event){
+        event.preventDefault()
+        if(nombreSaisies >= 3){
+            alert("Vous avez dépassé le nombre de tentatives");
+            document.getElementById("verif").type = "submit";
+            document.getElementById("form-contact").style.display = "none";
+        }
+        else if(document.getElementById("input").value != numeroAleatoire){
+            alert("Ce n'est pas le bon numéro");
+            changeNumber();
+            nombreSaisies++;
+        }
+        else if(document.getElementById("input").value == numeroAleatoire){
+            alert("Bravo, vous avez trouvé le bon numéro");
+            document.getElementById("verif").type = "submit";
+
+        }
+        checkObligatoire();
+
+        if(document.getElementById("sujet").value == "other"){
+            ajouterOption(document.getElementById("other").value);
+        }
+
+        verifMail();
+
+    });
+
+    if(window.navigator.userAgent.indexOf("Chrome") != -1){
+        alert("Vous utilisez Chrome");
+    }
+    else{
+        alert("Vous n'utilisez pas Chrome");
+    }
+    if(window.navigator.language == "fr"){
+        alert("c'est bon c'est français")
+    }
+    else{
+        alert("c'est pas bon c'est pas français")
+    }
+
+    document.getElementById("sujet").addEventListener("change", function(){
+        if(document.getElementById("sujet").value == "other"){
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "other";
+            input.id = "other";
+            document.getElementById("sujet").after(input);
+        }
+        else{
+            document.getElementById("other").remove();
+        }
+    })
+
+    function ajouterOption(newOption) {
+        var select = document.getElementById("sujet");
+        var option = document.createElement("option");
+        option.text = newOption;
+        option.value = newOption;
+        select.add(option);
+    }
+
+
+</script>
+
+
+
+<style>
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    label{
+        margin: 10px;
+    }
+    input{
+        margin: 10px;
+    }
+    textarea{
+        margin: 10px;
+    }
+    select{
+        margin: 10px;
+    }
+    button{
+        margin: 10px;
+    }
+</style>

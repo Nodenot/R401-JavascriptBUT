@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP2</title>
+
+</head>
+<body>
+    <section id="res"></section>
+    <section id="exo4">
+
+        <div><span id="label1">3*2</span>=<input type="text" id="input"></div>
+        <div><span id="label2">6*7</span>=<input type="text" id="input"></div>
+        <div><span id="label3">4*4</span>=<input type="text" id="input"></div>
+        <div><span id="label4">3*5</span>=<input type="text" id="input"></div>
+    </section>
+
+    <br><br>
+    <button id="btn" onclick="verif()">Vérifier</button>
+    <div>
+    <label for="color">Choisissez une couleur</label>
+    <input type="color" id="color" value="#ff0000">
+    </div>
+
+    <div>
+    <label for="povrecolor">Choisissez une couleur</label>
+    <select name="povrecolor" id="povrecolor">
+        <option value="#C0C0C0">Gris</option>
+        <option value="#99FF66">Vert</option>
+        <option value="#669999">Bleu</option>
+
+    </div>
+    
+</body>
+</html>
+<script>
+
+    //Exercice 1
+    var tab=new Array('Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche');
+    
+    //c'est quoi la method join
+    function afficher(tab){
+        //On affiche "Les jours de la semaine : Lundi; Mardi; Mercredi; Jeudi; Vendredi; Samedi; Dimanche"
+        document.getElementById('res').innerHTML="Les jours de la semaine : "+tab.join(" ; ");
+    
+    }
+
+    function afficher2(tab){
+       //On utilise la methode for
+         var res="";
+        for (let i = 0; i < tab.length; i++) {
+            res+="Jour "+i +" : " +tab[i]+"<br>";
+
+        }
+        document.getElementById('res').innerHTML=res;
+    }
+
+
+    //Exercice 2
+
+    function somRec(i){
+        //Si i n'est pas un nombre entier ou si i est négatif, on retourne undefined
+        if (typeof(i) != "number" || i<0 || i%1!=0){
+            return undefined;
+        }
+        if (i==0){
+            return i;
+        }
+        //Si il est bon on fait la somme de i à 0
+        return i+somRec(i-1);
+      
+    }
+
+    function somFor(i){
+        //Si i n'est pas un nombre entier ou si i est négatif, on retourne undefined
+        if (typeof(i) != "number" || i<0 || i%1!=0){
+            return undefined;
+        }
+        var res=0;
+        for (let j = 0; j <= i; j++) {
+            res+=j;
+        }
+        return res;
+    }
+
+    function prompteur(){
+        val=prompt('Entrez un nombre entier positif',0);
+        //Si c'est pas un nombre on affiche une erreur
+        if (isNaN(val)){
+            alert("Erreur");
+        }
+        else{
+            //On affiche someRec et somFor
+            val=Number(val);
+            alert("somRec("+val+")="+somRec(val)+"\nsomFor("+val+")="+somFor(val));
+        }
+    }
+
+    //Exercice 3
+    function getBrowserName(){
+        //On affiche le nom du navigateur et sa version
+        alert(window.navigator.appCodeName+" "+window.navigator.appVersion);
+    }
+
+    function getDocumentTitle(){
+        //On affiche le titre de la page
+        alert(document.title);
+    }
+
+    function getLastModified(){
+        //On affiche la date de dernière modification de la page
+        alert(document.lastModified);
+    }
+
+    function verif(){
+        //On recupe les libellés des div dans la section exo4
+        var instru=document.getElementById('exo4').getElementsByTagName('div');
+        errors=0;
+        for (let i=0; i<instru.length;i++){
+            //On recupere le span de chaque div
+            var express=instru[i].getElementsByTagName('span')[0];
+            var res=instru[i].getElementsByTagName('input')[0];
+            if (eval(express.innerHTML)!=res.value){
+                errors++;
+                res.style.borderColor="red";
+            }
+            else{
+                res.style.borderColor="green";
+            }
+            
+        }
+
+        if (errors==0){
+            alert("Bravo, vous avez réussi");
+        }
+        else{
+            alert("Vous avez fait "+errors+" erreurs");
+        }
+
+
+    }
+    document.getElementById("color").addEventListener("change",function(){
+        document.body.style.backgroundColor=this.value;
+    });
+
+    document.getElementById("povrecolor").addEventListener("change",function(){
+        document.body.style.backgroundColor=this.value;
+    });
+
+</script>

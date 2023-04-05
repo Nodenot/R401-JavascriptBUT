@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 2</title>
+</head>
+<body>
+    <!-- On filtre les IPs  par le dernier octet et le domaine genre .fr  -->
+    <form method="post">
+        <label for="ip">IP</label>
+        <input type="text" name="ip" id="ip">
+        <label for="domain">Domain</label>
+        <input type="text" name="domain" id="domain">
+        <input type="submit" value="Send">
+    </form>
+    
+</body>
+</html>
+
+<script>
+    //On crée un array de 10 URLs avec des location avec des IP et des domaines qui seront filtrés
+    let urls = [
+        "http://10.6.78.192:8080/tp3exo2.html",
+        "http://fezgfusehiv.fr:8080/tp3exo2.html",
+        "http://224.36.86.89:8080/tp3exo2.html",
+        "http://JGDVSJHV.fr:8080/tp3exo2.html",
+        "http://56.19.34.192:8080/tp3exo2.html",
+        "http://164.232.86.89:8080/tp3exo2.html",
+        "http://jsdgvsjdkv.fr:8080/tp3exo2.html",
+        "http://92.32.45.82:8080/tp3exo2.html",
+        "http://saucevsjdv.de:8080/tp3exo2.html"
+    ];
+
+    document.getElementsByTagName('form')[0].addEventListener('submit', function(e){
+        e.preventDefault();
+        let ip = document.getElementById('ip').value;
+        let domain = document.getElementById('domain').value;
+        let filtered = urls.filter(url => url.includes(ip) || url.includes(domain));
+        for (let i = 0; i < urls.length; i++) {
+            if (!filtered.includes(urls[i])) {
+                fenetre=open("", urls[i], "width=500, height=500");
+                span=document.createElement('span');
+                span.innerHTML = urls[i];
+                fenetre.document.body.appendChild(span);
+            }
+        }
+        return false;
+    });
+
+</script>

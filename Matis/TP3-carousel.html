@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 - Carousel</title>
+</head>
+<body>
+    <img src="" alt="" id="slideshow">
+    <script>
+        var mesImages = ["images/djokovic.jpg", "images/federer.jpg", "images/nadal.jpg"];
+
+        var imgCourante = 0;
+
+        // Afficher la premier image
+        document.getElementById("slideshow").src = mesImages[imgCourante];
+
+        // Fonction qui passe a l'image suivante
+        function imgSuivante() {
+            // Incrémenter l'index de l'image en cours
+            imgCourante++;
+            // Si on a atteint la fin du tableau, revenir au début
+            if (imgCourante >= mesImages.length) {
+                imgCourante = 0;
+            }
+            // Mettre à jour la source de l'image
+            document.getElementById("slideshow").src = mesImages[imgCourante];
+
+            // mettre la couleur dominante de l'image en background-color
+            document.body.style.backgroundColor = getDominantColor(mesImages[imgCourante]);
+        }
+
+        // Changement d'image toutes les 3 secondes
+        setInterval(imgSuivante, 3000);
+
+        // Evenement dès que je clique sur le body
+        document.body.onclick = imgSuivante;
+
+        // Evenement dès que je scroll
+        document.body.onwheel = imgSuivante;        
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black;
+        }
+        #slideshow {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP4</title>
+</head>
+<body>
+    <h1>Ex1 : Recherche par mot clé</h1>
+    <label for="input">Entrez votre requête : </label>
+    <input type="text" id="input">
+    <ul id="affichage">
+        <li>Aucun résultat</li>
+    </ul>
+
+    <script>
+        var tab = [
+            { terme: 'art', uris: ['http://monsite1.fr', 'http://monsite2.fr']},
+            { terme: 'chien', uris: ['http://monsite1.fr', 'http://monsite3.fr']},
+            { terme: 'chat', uris: ['http://monsite1.fr', 'http://monsite2.fr', 'http://monsite3.fr']},
+            { terme: 'oiseau', uris: ['http://monsite2.fr', 'http://monsite3.fr']},
+            { terme: 'poisson', uris: ['http://monsite1.fr']},
+            { terme: 'poule', uris: ['http://monsite2.fr']},
+            { terme: 'poulet', uris: ['http://monsite3.fr']},
+        ]
+
+        const input = document.getElementById('input');
+        const affichage = document.getElementById('affichage');
+
+        input.addEventListener('input', (e) => {
+            const value = e.target.value;
+
+            if(value === '') {
+                affichage.innerHTML = 'Aucun résultat';
+            } else {
+                const result = tab.filter((item) => {
+                    return item.terme.includes(value)
+                });
+
+                if (result.length === 0) {
+                    affichage.innerHTML = '<li>Aucun résultat</li>';
+                }
+                else {
+                    // on nettoie l'affichage
+                    affichage.innerHTML = '';
+
+                    // Lister les uris de result
+                    var uris = []
+                    
+                    for (let i = 0; i < result.length; i++) {
+                        uris.push(result[i].uris)
+                    }
+
+                    // Affichage des uris dans affichage
+                    for (let i = 0; i < uris.length; i++) {
+                        affichage.innerHTML += '<li>'
+                        for (let j = 0; j < uris[i].length; j++) {
+                            affichage.innerHTML += '<a href="#">' + uris[i][j] + '</a>, '
+                        }
+                        affichage.innerHTML += '</li>'
+                    }
+                }
+            }
+        })
+
+        // Ex3 : fonction recursive 
+        function zip_recursif(v) {
+            if (v.length===0) {
+                return []
+            } else {
+                
+            }
+        }
+
+        var test= [1, 1, 2, 4, 3, 3, 4, 3, 2, 1, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5];
+        console.log(zip_recursif(test));
+    </script>
+
+    <style>
+        
+    </style>
+</body>
+</html>

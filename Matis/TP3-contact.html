@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 - Contact</title>
+</head>
+<body>
+    <h2>Contact us</h2>
+    <form onsubmit="return false;">
+        <div class="unChamp">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+        </div>
+
+        <div class="unChamp">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+        </div>
+
+        <div class="unChamp">
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" id="subject">
+        </div>
+
+        <div class="unChamp">
+            <label for="category">Category</label>
+            <select name="category" id="category">
+                <option value="Smart Building">Smart Building</option>
+                <option value="Energy Management">Energy Management</option>
+                <option value="Ontology">Ontology</option>
+                <option value="Micro Grid">Micro Grid</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="unChamp" id="autre">
+            <label for="other">Autre</label>
+            <input type="text" name="other" id="other">
+        </div>
+
+        <div class="unChamp">
+            <label for="message">Your Message</label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        </div>
+
+        <div class="unChamp">
+            <label for="number">Captcha</label>
+            <div class="captcha"></div>
+            <input type="number" name="number" id="number">
+            <button id="test">Test</button>
+        </div>
+
+        <input type="submit" value="Send">
+    </form>
+
+    <script>
+        if (window.navigator.userAgent.indexOf("Chrome") > -1) {
+            // L'utilisateur utilise Chrome
+            console.log("L'utilisateur utilise Chrome");
+        }
+
+        if (navigator.language.toLowerCase().startsWith("fr")) {
+            // La langue préférée du navigateur est le français
+            console.log("La langue du navigateur est le français");
+        } 
+
+        // Faire une fonction qui tire 5 chiffres entre 0 et 9 au hasard et les assemble dans un seul nombre
+        function getRandomNumber() {
+            let number = '';
+            for (let i = 0; i < 5; i++) {
+                number += Math.floor(Math.random() * 10);
+            }
+            return number;
+        }
+        // Afficher le nombre au hasard dans le div.captcha
+        document.querySelector('.captcha').innerHTML = getRandomNumber();
+
+        // Verifier si il rate 5 fois
+        let nbTentatives = 0;
+        document.querySelector('#test').addEventListener('submit', function(e) {
+            if (document.querySelector('#number').value != document.querySelector('.captcha').innerHTML) {
+                nbTentatives++;
+                // MEttre captcha en bordure rouge
+                document.querySelector('.captcha').style.border = '1px solid red';
+
+                // Réafficher un nouveau captcha
+                document.querySelector('.captcha').innerHTML = getRandomNumber();
+                
+                if (nbTentatives == 5) {
+                    alert("Vous avez raté 5 fois !");
+                    // Renvoie l'utilisateur sur la page d'accueil
+                    window.location.href = "rate.html";
+                }
+            }
+        });
+
+        // Quand Other est selectionné on affiche le champ autre
+        document.querySelector('#category').addEventListener('change', function(e) {
+            if (e.target.value == 'Other') {
+                document.querySelector('#autre').style.display = 'block';
+            } else {
+                document.querySelector('#autre').style.display = 'none';
+            }
+        });
+
+        // evenement quand on clique sur le bouton send
+        document.querySelector('input[type="submit"]').addEventListener('click', function(e) {
+            let erreur = false;
+            // On verifie que chaque champ est saisi
+            let champName = document.querySelector('#name');
+            if (champName.value == '') {
+                // On met la bordure de l'input en rouge
+                champName.style.border = '1px solid red';
+                erreur = true;
+            }
+
+            let champEmail = document.querySelector('#email');
+            if (champEmail.value == '') {
+                // On met la bordure de l'input en rouge
+                champEmail.style.border = '1px solid red';
+                erreur = true;
+            }
+
+            let champSubject = document.querySelector('#subject');
+            if (champSubject.value == '') {
+                // On met la bordure de l'input en rouge
+                champSubject.style.border = '1px solid red';
+                erreur = true;
+            }
+
+            // Vérifier que l’email saisi contienne un seul « @ » et au moins « . ». Vous pouvez utiliser les expressions régulières si vous le souhaitez
+            var expression = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var email = champEmail.value;
+            if (!expression.test(email)) {
+                // L'adresse email n'est pas valide
+                champEmail.style.border = '1px solid red';
+                erreur = true;
+            }
+
+            // Verifier le captcha
+            if (document.querySelector('#number').value != document.querySelector('.captcha').innerHTML) {
+                // MEttre captcha en bordure rouge
+                document.querySelector('#number').style.border = '1px solid red';
+                // Réafficher un nouveau captcha
+                document.querySelector('.captcha').innerHTML = getRandomNumber();
+                // mettre le curseur dans le champ captcha
+                document.querySelector('#number').focus();
+                erreur = true;
+            }
+
+            // Si tout est bon on envoie le formulaire
+            if (!erreur) {
+                // On envoie le formulaire
+                document.querySelector('form').submit();
+            }
+        });
+
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .unChamp {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+        }
+
+        #autre {
+            display: none;
+        }
+
+        #test {
+            width: 30%;
+            align-self: center;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            height: 30px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</body>
+</html>

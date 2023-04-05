@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP3 - Filtre</title>
+</head>
+<body>
+    
+
+    <script>
+          // Créer un tableau de 10 url
+            let urls = [
+                "https://www.google.com",
+                "https://www.youtube.com",
+                "https://www.facebook.com",
+                "https://www.amazon.com",
+                "https://www.wikipedia.org",
+                "https://www.yahoo.com",
+                "https://www.reddit.com",
+                "https://www.instagram.com",
+                "https://www.twitter.com",
+                "https://www.linkedin.com"
+            ];
+
+            // Fontion qui traite des adresses ip de type "0.0.0.0" d'un tableau et qui renvoie uniquement celles qui finissent par .192
+            function filtreIP(tab) {
+                return tab.filter((ip) => ip.endsWith(".192"));
+            }
+
+            // Fonction qui traite des url d'un tableau et qui renvoie uniquement celles qui finissent pas .fr
+            function filtreURL(tab) {
+                return tab.filter((url) => url.endsWith(".fr"));
+            }
+
+            // Récupérer les adresses IP de chaque url
+            const url = urls[2];
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.send();
+            xhr.onload = function () {
+                console.log(xhr.status)
+                const ip = xhr.response.match(/(?<=\b(?:[0-9]{1,3}\.){3})[0-9]{1,3}(?=\b)/)[0];
+                console.log(ip);
+            };
+            
+
+            
+
+    </script>
+
+    <style>
+        
+    </style>
+</body>
+</html>

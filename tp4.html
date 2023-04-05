@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP4 recherche.html</title>
 </head>
+
 <body>
-    <input type="text" id="search">
-    <button onclick="search()">Search</button>
-    <div id="result"></div>
-    <br><br>
-    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-437.34375000000006%2C-88.07532853412853%2C490.78125000000006%2C89.87979880372886&amp;layer=mapnik" style="border: 1px solid black"></iframe><br>
-    <button onclick="trouverFR()">Trouver la France</button>
-    <script>
-        var data = {
-            "XML": ["http://monsite1.fr", "http://monsite2.fr"],
-            "HTML": ["http://monsite3.fr", "http://monsite4.fr"],
-            "CSS": ["http://monsite5.fr", "http://monsite6.fr"],
-            "JavaScript": ["http://monsite7.fr", "http://monsite8.fr"]
+  <input oninput="test(this)" name="" id="" cols="30" rows="10"></input>
+  <p id="autoCompletePara" class="autoComplete"></p>
+  <p id="responsePara" class="response"></p>
+  <script>
+    let BALISE_INPUT_USER = document.querySelector("input");
+    // BALISE_INPUT_USER.addEventListener("onInput", () => test());    
+    let INPUT_USER = BALISE_INPUT_USER.innerText;
 
-            };
-        function search(){
-            var search = document.getElementById('search').value;
-            var result = document.getElementById('result');
-            result.innerHTML = "";
-            for (var key in data){
-                if (key.includes(search)){
-                    for (var i=0; i<data[key].length; i++){
-                        result.innerHTML += "<a href='"+data[key][i]+"' target='_blank'>"+data[key][i]+"</a><br>";
-                    }
-                }
-            }
+    const D1 = "document1.html"
+    const D2 = "document2.html"
+    let tab = {
+
+      "art": [D1, D2],
+      "plaire": [D1],
+      "est": [D1],
+      "tromper": [D1],
+      "nous": [D2],
+      "avons": [D2],
+      "afin": [D2],
+      "pas": [D2],
+      "mourir": [D2],
+      "vérité": [D2]
+
+    }
+
+    function test(p) {
+      autoCompletePara.innerHTML = "";
+      Object.keys(tab).forEach((e) => { if (e.includes(p.value)) autoCompletePara.innerHTML += "<br>" + e })
+      let INPUT_USER = p.value
+
+      //sup ancinne reponse
+      document.querySelectorAll(".response").forEach((e) => e.remove())
+      //ajoute nouvelle reponse
+      if (tab[p.value]) {
+        tab[p.value].forEach(element => {
+          let a = document.createElement('a')
+          a.href = element
+          a.innerHTML = element
+          a.className = "response"
+          a.target = "_blank"
+          document.body.append(a)
+        });
+      }
+    }
+    let x = [1, 1, 4, 0, 9, 9, 6, 7]
+    function zip(v) {
+      if (v.length === 0) {
+        return [];
+      } else {
+        let rest = zip(v.slice(1));
+        if (rest.indexOf(v[0]) === -1) {
+          return [v[0]].concat(rest);
+        } else {
+          return rest;
         }
-        function trouverFR(){
-            url='https://www.openstreetmap.org/export/embed.html?bbox=-12.744140625000002%2C38.20365531807151%2C16.259765625000004%2C51.944264879028765&amp;layer=mapnik"';
-            document.getElementsByTagName('iframe')[0].src=url; 
-        }
+      }
+    }
+    console.log(zip(x))
 
-        function zip(v) {
-            // Cas de base
-            if (v.length === 0) {
-                return [];
-            }
-            
-            // Récursion
-            const reste = zip(v.slice(1));
-            if (reste.includes(v[0])) {
-                return reste;
-            } else {
-                return [v[0], ...reste];
-            }
-        }
-        
-        
-        
-        
+    Object.keys(tab).forEach((e) => { autoCompletePara.innerHTML += "<br>" + e })
+  </script>
 
-
-    </script>
 </body>
+
 </html>
